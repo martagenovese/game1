@@ -5,47 +5,75 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background-color: #34131b;
+    background: linear-gradient(135deg, #34131b, #240c12);
     font-family: 'Arial', sans-serif;
     color: #ffffff;
+    overflow: hidden;
 }
 
-canvas {
-    border: 5px solid #240c12;
-    background-color: #fff;
-}
-
-div {
-    margin-top: 20px;
+.container {
     text-align: center;
+    background-color: rgba(36, 12, 18, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 2s ease-in-out;
 }
 
-label {
-    font-size: 1.2em;
-    margin-right: 10px;
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ffffff;
 }
 
 button {
     font-size: 1.2em;
-    padding: 5px 10px;
-    margin: 0 5px;
+    padding: 10px 20px;
+    margin: 10px;
     border: none;
     border-radius: 5px;
     background-color: #55555500;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 button:hover {
-    background-color: #240c12;
+    background-color: #1e080e;
 }
 
 button:active {
     background-color: #4c1221;
+    transform: scale(0.95);
 }
 
-span {
-    font-size: 1.2em;
-    margin: 0 10px;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+    background-size: 50px 50px;
+    animation: moveBackground 20s linear infinite;
+    z-index: -1;
 }

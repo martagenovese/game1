@@ -8,8 +8,8 @@ const squareSize = 40;
 const grid = [];
 
 const balls = [
-    { x: 80, y: 60, dx: 5, dy: 3, color: 'white', borderColor: 'black', leftHalf: true },
-    { x: 340, y: 110, dx: -3, dy: -5, color: 'black', borderColor: 'white', leftHalf: false }
+    { x: 80, y: 60, dx: 3, dy: 1, color: 'white', borderColor: 'black', leftHalf: true },
+    { x: 340, y: 110, dx: -1, dy: -3, color: 'black', borderColor: 'white', leftHalf: false }
 ];
 
 // Initialize the grid with alternating colors
@@ -47,7 +47,7 @@ function changeSpeed(ballIndex, delta) {
     const speedElement = document.getElementById(`speed${ballIndex + 1}`);
     let speed = parseFloat(speedElement.textContent);
     speed = Math.max(0.5, speed + delta); // Ensure speed doesn't go below 0.5
-    if (speed > 10) speed = 10; // Ensure speed doesn't go above 10
+    if (speed > 5) speed = 5; // Ensure speed doesn't go above 10
     speedElement.textContent = speed.toFixed(1);
     balls[ballIndex].dx = speed * Math.sign(balls[ballIndex].dx);
     balls[ballIndex].dy = speed * Math.sign(balls[ballIndex].dy);
