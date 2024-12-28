@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = 500;
 canvas.height = 500;
 
-const ballRadius = 15;
+ballRadius = 15;
 squareSize = 25;
 grid = [];
 
@@ -187,4 +187,9 @@ gameLoop();
 document.getElementById('squareSize').addEventListener('input', (event) => {
     squareSize = parseInt(event.target.value);
     initializeGrid();
+});
+
+// Handle ball size change
+document.getElementById('ballSize').addEventListener('input', (event) => {
+    ballRadius = parseInt(event.target.value);
 });

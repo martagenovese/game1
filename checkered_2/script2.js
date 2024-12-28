@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = 500;
 canvas.height = 500;
 
-const ballRadius = 10;
+let ballRadius = 10;
 let squareSize = 40;
 let grid = [];
 
@@ -69,23 +69,11 @@ function updateBalls() {
         ball.y += ball.dy;
 
         // Bounce off walls
-        if (ball.x + ballRadius > canvas.width || ball.x - ballRadius < 0 ) {
+        if (ball.x + ballRadius > canvas.width || ball.x - ballRadius < 0) {
             ball.dx *= -1;
-            playNote();
         }
         if (ball.y + ballRadius > canvas.height || ball.y - ballRadius < 0) {
             ball.dy *= -1;
-            playNote();
-        }
-
-        // stay in their half
-        if (ball.leftHalf && ball.x > canvas.width / 2) {
-            ball.dx *= -1;
-            playNote();
-        }
-        if (!ball.leftHalf && ball.x < canvas.width / 2) {
-            ball.dx *= -1;
-            playNote();
         }
 
         // Change square color based on the ball's color
@@ -95,6 +83,34 @@ function updateBalls() {
             grid[gridX][gridY] = ball.color;
         }
     });
+
+    // Check for collisions between balls
+    for (let i = 0; i < balls.length; i++) {
+        for (let j = i + 1; j < balls.length; j++) {
+            const dx = balls[j].x - balls[i].x;
+            const dy = balls[j].y - balls[i].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < ballRadius * 2) {
+                // Bounce in opposite directions
+                const tempDx = balls[i].dx;
+                const tempDy = balls[i].dy;
+                balls[i].dx = balls[j].dx;
+                balls[i].dy = balls[j].dy;
+                balls[j].dx = tempDx;
+                balls[j].dy = tempDy;
+
+                // Move balls apart to avoid overlap
+                const overlap = ballRadius * 2 - distance;
+                const moveX = overlap * (dx / distance) / 2;
+                const moveY = overlap * (dy / distance) / 2;
+                balls[i].x -= moveX;
+                balls[i].y -= moveY;
+                balls[j].x += moveX;
+                balls[j].y += moveY;
+            }
+        }
+    }
 }
 
 // Main game loop
@@ -114,4 +130,9 @@ gameLoop();
 document.getElementById('squareSize').addEventListener('input', (event) => {
     squareSize = parseInt(event.target.value);
     initializeGrid();
+});
+
+// Handle ball size change
+document.getElementById('ballSize').addEventListener('input', (event) => {
+    ballRadius = parseInt(event.target.value);
 });
