@@ -71,10 +71,25 @@ function updateBalls() {
         // Bounce off walls
         if (ball.x + ballRadius > canvas.width || ball.x - ballRadius < 0) {
             ball.dx *= -1;
+            playNote();
         }
         if (ball.y + ballRadius > canvas.height || ball.y - ballRadius < 0) {
             ball.dy *= -1;
+            playNote();
         }
+
+        // Stay in their half of the canvas
+        if (ball.leftHalf && ball.x > canvas.width / 2) {
+            ball.x = canvas.width / 2 - ballRadius;
+            ball.dx *= -1;
+            playNote();
+        }
+        if (!ball.leftHalf && ball.x < canvas.width / 2) {
+            ball.x = canvas.width / 2 + ballRadius;
+            ball.dx *= -1;
+            playNote();
+        }
+        
 
         // Change square color based on the ball's color
         const gridX = Math.floor(ball.x / squareSize);
