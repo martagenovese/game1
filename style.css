@@ -78,8 +78,75 @@ body::before {
     left: 0;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0) 10%, transparent 10%);
     background-size: 50px 50px;
     animation: moveBackground 20s linear infinite;
     z-index: -1;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #19080c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #240c12;
+    padding: 20px;
+    border: 1px solid #300f15;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"] {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px 0;
+    background: transparent;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: #19080c;
+    border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #4c1221;
+    cursor: pointer;
+    margin-top: -6px; /* Adjust to align thumb with track */
+}
+
+input[type="range"]::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #300f15;
+    cursor: pointer;
+}
+
+input[type="range"]::-ms-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #300f15;
+    cursor: pointer;
 }

@@ -9,8 +9,20 @@
 <body>
     <div class="container">
         <h1>Choose Your Option</h1>
-        <button onclick="window.location.href='first.html'">Go to First</button>
-        <button onclick="window.location.href='second.html'">Go to Second</button>
+        <button onclick="window.location.href='./checkered_1/first.html'">Go to First</button>
+        <button onclick="window.location.href='./checkered_2/second.html'">Go to Second</button>
     </div>
+    <audio id="backgroundMusic" loop>
+        <source src="soft-synth-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div id="musicModal" class="modal">
+        <div class="modal-content">
+            <p>Do you want to play background music?</p>
+            <button id="acceptMusic">Yes</button>
+            <button id="declineMusic">No</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
